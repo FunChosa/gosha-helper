@@ -1,0 +1,39 @@
+.add-edit-form__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 24px;
+  border: 0.5px solid var(--stroke-color);
+  padding: 2rem 2rem;
+}
+
+.add-edit-form__input-branch {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--stroke-color);
+  border-radius: 0.5rem;
+  width: 10rem;
+}
+
+.add-edit-form__input-link {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--stroke-color);
+  border-radius: 0.5rem;
+}
+
+.add-edit-form__container textarea {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--stroke-color);
+  border-radius: 0.5rem;
+  min-height: 10rem;
+}
+
+.add-edit-form__container button {
+  padding: 0.5rem 1rem;
+  background-color: var(--yellow-color);
+  color: var(--black-color);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  width: fit-content;
+  align-self: flex-end;
+}

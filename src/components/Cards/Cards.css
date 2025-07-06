@@ -1,0 +1,22 @@
+.cards__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 50%;
+}
+
+.cards__search-input {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--stroke-color);
+  border-radius: 0.5rem;
+  width: 14rem;
+}
+
+.cards__cards-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 700px;
+  overflow-y: scroll;
+  padding-right: 1rem;
+}

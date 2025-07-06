@@ -1,44 +1,71 @@
 import { create } from "zustand";
-import persist from "zustand/middleware";
-
-const EMPTY_CARD = {
-  number: 0,
-  description: "",
-  id: "",
-};
+import { persist } from "zustand/middleware";
 
 const useStore = create(
-  persist((set) => ({
-    cards: [],
-    newCard: EMPTY_CARD,
+  persist(
+    (set) => ({
+      cards: [],
+      newCard: {
+        number: null,
+        description: "",
+        id: "",
+        link: "",
+        pinned: false,
+      },
+      editableCard: null,
 
-    isAddFormOpen: false,
-    isEditFormOpen: false,
-    isDeletePopoverOpen: false,
+      isAddFormOpen: false,
+      isEditFormOpen: false,
+      isDeletePopoverOpen: false,
+      baseUrl: "https://jsonplaceholder.typicode.com/comments",
 
-    addCard: () => {
-      set((state) => ({ cards: [...state.cards, newCard] }));
-    },
+      addCard: (card) => {
+        set((state) => ({ cards: [...state.cards, card] }));
+      },
 
-    deleteCard: (cardId) =>
-      set((state) => ({
-        cards: state.cards.filter((card) => card.id !== cardId),
-      })),
+      deleteCard: (cardId) =>
+        set((state) => ({
+          cards: state.cards.filter((card) => card.id !== cardId),
+        })),
 
-    editCard: (editedCard) =>
-      set((state) => ({
-        cards: state.cards.map((card) =>
-          card.id === editedCard.id ? editedCard : card
-        ),
-      })),
+      editCard: (editedCard) =>
+        set((state) => ({
+          cards: state.cards.map((card) =>
+            card.id === editedCard.id ? editedCard : card
+          ),
+        })),
 
-    openAddForm: () => set({ isAddFormOpen: true }),
-    closeAddForm: () => set({ isAddFormOpen: false }),
+      setNewCard: (newCard) => set({ newCard }),
+      setEditableCard: (editableCard) => set({ editableCard }),
 
-    openEditForm: () => set({ isEditFormOpen: true }),
-    closeEditForm: () => set({ isEditFormOpen: false }),
+      openAddForm: () => set({ isAddFormOpen: true, isEditFormOpen: false }),
+      closeAddForm: () => set({ isAddFormOpen: false }),
 
-    openDeletePopover: () => set({ isDeletePopoverOpen: true }),
-    closeDeletePopover: () => set({ isDeletePopoverOpen: false }),
-  }))
+      openEditForm: (card) =>
+        set({ isEditFormOpen: true, isAddFormOpen: false, editableCard: card }),
+      closeEditForm: () => set({ isEditFormOpen: false, editableCard: null }),
+
+      openDeletePopover: () => set({ isDeletePopoverOpen: true }),
+      closeDeletePopover: () => set({ isDeletePopoverOpen: false }),
+
+      setNewCard: (newCard) => set({ newCard }),
+      resetNewCard: () =>
+        set({
+          newCard: {
+            number: null,
+            description: "",
+            id: "",
+            link: "",
+            pinned: false,
+          },
+        }),
+
+      resetEditableCard: () => set({ editableCard: null }),
+    }),
+    {
+      name: "gosha-helper",
+    }
+  )
 );
+
+export default useStore;

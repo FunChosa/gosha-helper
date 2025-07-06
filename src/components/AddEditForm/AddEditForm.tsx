@@ -1,21 +1,108 @@
+import { useState } from "react";
+import Edit from "../../icons/edit.svg";
+import Close from "../../icons/close.svg";
 import "./AddEditForm.css";
 
-const AddEditForm = () => {
+const AddEditForm = ({
+  closeForm,
+  handleSaveForm,
+  resetCard,
+  setCard,
+  cardTitle,
+  buttonTitle,
+  card,
+  handleLinkCreate,
+  baseUrl,
+}: {
+  closeForm: () => void;
+  handleSaveForm: () => void;
+  resetCard: () => void;
+  setCard: (card: any) => void;
+  handleLinkCreate: (value: string) => string;
+  cardTitle: string;
+  buttonTitle: string;
+  card: any;
+  baseUrl: string;
+}) => {
+  const [isLinkDisabled, setIsLinkDisabled] = useState(true);
+  const handleToggleLinkDisabled = () => {
+    setIsLinkDisabled(!isLinkDisabled);
+  };
+
+  const handleCancelForm = () => {
+    resetCard();
+    closeForm();
+  };
+
   return (
     <div className="add-edit-form__container">
-      <h1>Adding new link</h1>
+      <div className="add-edit-form__header">
+        <h1>{cardTitle}</h1>
+        <img
+          src={Close}
+          alt="close"
+          className="add-edit-form__close-icon"
+          onClick={handleCancelForm}
+        />
+      </div>
+
       <input
         type="number"
         placeholder="Branch number"
         className="add-edit-form__input-branch"
+        value={card.number || ""}
+        onChange={(e) => {
+          setCard({
+            ...card,
+            number: Number(e.target.value) || "",
+            link: handleLinkCreate(e.target.value),
+          });
+        }}
       />
-      <input
-        type="text"
-        placeholder="https://www.figma.com/design/uaGFw6cccDSSnAoV0aweHS/Собираем_лендинг_вместе?node-id=1632-10&t=fveQ4BWIu3itY532-0"
-        className="add-edit-form__input-link"
+
+      <div className="add-edit-form__link-container">
+        <input
+          type="text"
+          className="add-edit-form__input-link"
+          placeholder="Environment link"
+          value={card.link || baseUrl}
+          disabled={isLinkDisabled}
+          onChange={(e) =>
+            setCard({
+              ...card,
+              link: e.target.value,
+            })
+          }
+        />
+        <img
+          src={Edit}
+          alt="edit"
+          className="add-edit-form__edit-icon"
+          onClick={handleToggleLinkDisabled}
+        />
+      </div>
+
+      <textarea
+        placeholder="Description (optional)"
+        value={card.description}
+        onChange={(e) =>
+          setCard({
+            ...card,
+            description: e.target.value,
+          })
+        }
       />
-      <textarea placeholder="Описание" />
-      <button>Save</button>
+
+      <button
+        onClick={() => {
+          handleSaveForm();
+          setIsLinkDisabled(true);
+        }}
+        className="add-edit-form__button"
+        disabled={!card.number || !card.link}
+      >
+        {buttonTitle}
+      </button>
     </div>
   );
 };

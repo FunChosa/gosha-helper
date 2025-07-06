@@ -47,6 +47,6 @@
   background-color: var(--green-color);
   color: var(--white-color);
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 12px;
   cursor: pointer;
 }

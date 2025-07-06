@@ -7,6 +7,8 @@
 
 .viewer__add-button-container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .viewer__add-button {
@@ -14,6 +16,6 @@
   background-color: var(--pink-color);
   color: var(--white-color);
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 12px;
   cursor: pointer;
 }

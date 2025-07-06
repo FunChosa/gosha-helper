@@ -8,7 +8,7 @@
 .cards__search-input {
   padding: 0.5rem 1rem;
   border: 1px solid var(--stroke-color);
-  border-radius: 0.5rem;
+  border-radius: 12px;
   width: 14rem;
 }
 
@@ -19,4 +19,8 @@
   height: 700px;
   overflow-y: scroll;
   padding-right: 1rem;
+}
+
+.cards__no-cards {
+  color: var(--stroke-color);
 }

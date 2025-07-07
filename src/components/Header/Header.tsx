@@ -48,7 +48,7 @@ const Header = () => {
         </div>
         <div className="header__search-container">
           <input
-            type="number"
+            type="text"
             placeholder="1754"
             className="header__search"
             onChange={(e) => setBranchNumber(e.target.value)}

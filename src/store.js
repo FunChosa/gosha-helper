@@ -6,7 +6,7 @@ const useStore = create(
     (set) => ({
       cards: [],
       newCard: {
-        number: null,
+        number: "",
         description: "",
         id: "",
         link: "",
@@ -52,7 +52,7 @@ const useStore = create(
       resetNewCard: () =>
         set({
           newCard: {
-            number: null,
+            number: "",
             description: "",
             id: "",
             link: "",

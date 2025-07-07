@@ -25,13 +25,18 @@ const Cards = () => {
 
   return (
     <div className="cards__container">
-      <input
-        type="search"
-        placeholder="Search"
-        className="cards__search-input"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
+      <div className="cards__search-container">
+        <input
+          type="search"
+          placeholder="Search"
+          className="cards__search-input"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        <div>
+          {filteredCards.length} / {cards.length} cards
+        </div>
+      </div>
       <div className="cards__cards-list-container">
         {filteredCards.length === 0 && (
           <div className="cards__no-cards">no cards found</div>
@@ -39,6 +44,9 @@ const Cards = () => {
         {filteredCards.map((card: any) => (
           <Card key={card.id} card={card} />
         ))}
+        {filteredCards.length > 10 && (
+          <div style={{ alignSelf: "center" }}>🤡</div>
+        )}
       </div>
     </div>
   );

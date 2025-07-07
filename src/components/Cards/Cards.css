@@ -24,3 +24,9 @@
 .cards__no-cards {
   color: var(--stroke-color);
 }
+
+.cards__search-container {
+  display: flex;
+  justify-content: space-between;
+  color: var(--stroke-color)
+}

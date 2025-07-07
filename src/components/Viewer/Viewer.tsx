@@ -66,20 +66,20 @@ const Viewer = () => {
           card={newCard}
           setCard={setNewCard}
           handleLinkCreate={handleLinkCreate}
-          baseUrl={baseUrl}
         />
       )}
       {isEditFormOpen && (
         <AddEditForm
           closeForm={closeEditForm}
-          cardTitle={`Edit: MON-${editableCard.number}`}
+          cardTitle={`Edit: MON-${
+            cards.find((card: any) => editableCard?.id === card.id).number
+          }`}
           buttonTitle="Update"
           handleSaveForm={handleEditCard}
           resetCard={resetEditableCard}
           card={editableCard}
           setCard={setEditableCard}
           handleLinkCreate={handleLinkCreate}
-          baseUrl={baseUrl}
         />
       )}
     </div>

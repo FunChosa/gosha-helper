@@ -12,7 +12,6 @@ const AddEditForm = ({
   buttonTitle,
   card,
   handleLinkCreate,
-  baseUrl,
 }: {
   closeForm: () => void;
   handleSaveForm: () => void;
@@ -22,7 +21,6 @@ const AddEditForm = ({
   cardTitle: string;
   buttonTitle: string;
   card: any;
-  baseUrl: string;
 }) => {
   const [isLinkDisabled, setIsLinkDisabled] = useState(true);
   const handleToggleLinkDisabled = () => {
@@ -47,14 +45,14 @@ const AddEditForm = ({
       </div>
 
       <input
-        type="number"
+        type="text"
         placeholder="Branch number"
         className="add-edit-form__input-branch"
         value={card.number || ""}
         onChange={(e) => {
           setCard({
             ...card,
-            number: Number(e.target.value) || "",
+            number: e.target.value || "",
             link: handleLinkCreate(e.target.value),
           });
         }}
@@ -65,7 +63,7 @@ const AddEditForm = ({
           type="text"
           className="add-edit-form__input-link"
           placeholder="Environment link"
-          value={card.link || baseUrl}
+          value={card.link || ""}
           disabled={isLinkDisabled}
           onChange={(e) =>
             setCard({

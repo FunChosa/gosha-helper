@@ -26,6 +26,7 @@ const Viewer = () => {
     cards,
     isSettingsOpen,
     openSettings,
+    closeSettings,
   } = useStore((state: any) => state);
 
   const handleAddCard = () => {
@@ -53,6 +54,10 @@ const Viewer = () => {
     }
   }, [cards]);
 
+  const handleToggleOpenSettings = () => {
+    return isSettingsOpen ? closeSettings() : openSettings();
+  };
+
   return (
     <div className="viewer__container">
       <div className="viewer__add-button-container">
@@ -63,7 +68,7 @@ const Viewer = () => {
           src={Settings}
           alt="edit"
           className="viewer__settings-icon"
-          onClick={openSettings}
+          onClick={handleToggleOpenSettings}
         />
       </div>
       {isSettingsOpen && <UrlSettings />}

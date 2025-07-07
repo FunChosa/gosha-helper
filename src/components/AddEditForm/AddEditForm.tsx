@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Edit from "../../icons/edit.svg";
+import Lock from "../../icons/lock.svg";
+import Unlock from "../../icons/unlock.svg";
 import Close from "../../icons/close.svg";
 import "./AddEditForm.css";
 
@@ -73,9 +74,9 @@ const AddEditForm = ({
           }
         />
         <img
-          src={Edit}
-          alt="edit"
-          className="add-edit-form__edit-icon"
+          src={isLinkDisabled ? Lock : Unlock}
+          alt="lock"
+          className="add-edit-form__lock-icon"
           onClick={handleToggleLinkDisabled}
         />
       </div>

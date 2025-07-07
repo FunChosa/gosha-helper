@@ -57,7 +57,7 @@
   cursor: not-allowed;
 }
 
-.add-edit-form__edit-icon {
+.add-edit-form__lock-icon {
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;

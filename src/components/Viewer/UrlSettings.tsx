@@ -11,7 +11,9 @@ const UrlSettings = () => {
   );
 
   const [urlTemplate, setUrlTemplate] = useState(baseUrl);
-  const [generatedUrl, setGeneratedUrl] = useState("");
+  const [generatedUrl, setGeneratedUrl] = useState(
+    baseUrl.replace("{{branchNumber}}", "1754")
+  );
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newUrl = e.target.value.replace("{{branchNumber}}", "1754");
@@ -22,7 +24,7 @@ const UrlSettings = () => {
   return (
     <div className="url-settings__container">
       <div className="url-settings_header">
-        <h3>Set URL template</h3>
+        <h1>Set URL template</h1>
         <img
           src={Close}
           alt="close"
@@ -50,10 +52,14 @@ const UrlSettings = () => {
           borderRadius: "12px",
         }}
       />
-      <h4>Example URL (branchNumber = 1754):</h4>
-      <a href={generatedUrl} target="_blank" rel="noopener noreferrer">
-        {generatedUrl}
-      </a>
+      <h3>Example URL (branchNumber = 1754):</h3>
+      {generatedUrl ? (
+        <a href={generatedUrl} target="_blank" rel="noopener noreferrer">
+          {generatedUrl}
+        </a>
+      ) : (
+        <p>no template</p>
+      )}
       <button
         className="url-settings__save-button"
         onClick={() => {

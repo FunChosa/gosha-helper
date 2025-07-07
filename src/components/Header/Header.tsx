@@ -6,25 +6,26 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 const Header = () => {
-  const { baseUrl } = useStore((state: any) => state);
+  const { baseUrl, openSettings } = useStore((state: any) => state);
   const [branchNumber, setBranchNumber] = useState("");
 
   const handleBranchOpen = () => {
-    if (!branchNumber) {
-      toast.error("Please enter branch number", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      return;
-    }
     if (!baseUrl) {
-      toast.error("Please enter base url", {
+      toast.error("Please set base url", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      openSettings();
+      return;
+    }
+    if (!branchNumber) {
+      toast.error("Please set branch number", {
         position: "top-center",
         autoClose: 4000,
         hideProgressBar: false,
@@ -36,7 +37,8 @@ const Header = () => {
       });
       return;
     }
-    window.open(`${baseUrl}/${branchNumber}`, "_blank");
+
+    window.open(baseUrl.replace("{{branchNumber}}", branchNumber), "_blank");
   };
 
   return (

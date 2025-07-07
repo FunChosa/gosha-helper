@@ -1,9 +1,11 @@
 import AddEditForm from "../AddEditForm/AddEditForm";
+import Settings from "../../icons/settings.svg";
 import "./Viewer.css";
 // @ts-ignore
 import useStore from "../../store";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect } from "react";
+import UrlSettings from "./UrlSettings";
 
 const Viewer = () => {
   const {
@@ -22,6 +24,8 @@ const Viewer = () => {
     resetEditableCard,
     baseUrl,
     cards,
+    isSettingsOpen,
+    openSettings,
   } = useStore((state: any) => state);
 
   const handleAddCard = () => {
@@ -37,7 +41,7 @@ const Viewer = () => {
   };
 
   const handleLinkCreate = (value: string) => {
-    return `${baseUrl}/${value}`;
+    return baseUrl.replace(/{{branchNumber}}/g, value);
   };
 
   useEffect(() => {
@@ -55,7 +59,14 @@ const Viewer = () => {
         <button className="viewer__add-button" onClick={openAddForm}>
           + add
         </button>
+        <img
+          src={Settings}
+          alt="edit"
+          className="viewer__settings-icon"
+          onClick={openSettings}
+        />
       </div>
+      {isSettingsOpen && <UrlSettings />}
       {isAddFormOpen && (
         <AddEditForm
           closeForm={closeAddForm}

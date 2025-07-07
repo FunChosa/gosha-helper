@@ -17,7 +17,8 @@ const useStore = create(
       isAddFormOpen: false,
       isEditFormOpen: false,
       isDeletePopoverOpen: false,
-      baseUrl: "https://jsonplaceholder.typicode.com/comments",
+      isSettingsOpen: false,
+      baseUrl: "",
 
       addCard: (card) => {
         set((state) => ({ cards: [...state.cards, card] }));
@@ -41,6 +42,9 @@ const useStore = create(
       openAddForm: () => set({ isAddFormOpen: true, isEditFormOpen: false }),
       closeAddForm: () => set({ isAddFormOpen: false }),
 
+      openSettings: () => set({ isSettingsOpen: true }),
+      closeSettings: () => set({ isSettingsOpen: false }),
+
       openEditForm: (card) =>
         set({ isEditFormOpen: true, isAddFormOpen: false, editableCard: card }),
       closeEditForm: () => set({ isEditFormOpen: false, editableCard: null }),
@@ -61,6 +65,7 @@ const useStore = create(
         }),
 
       resetEditableCard: () => set({ editableCard: null }),
+      setBaseUrl: (baseUrl) => set({ baseUrl }),
     }),
     {
       name: "gosha-helper",

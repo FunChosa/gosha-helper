@@ -11,8 +11,8 @@ function App() {
       <div className="body__container">
         <Viewer />
         <Cards />
-        <ToastContainer />
       </div>
+      <ToastContainer />
     </div>
   );
 }

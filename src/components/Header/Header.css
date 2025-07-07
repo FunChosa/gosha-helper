@@ -30,13 +30,13 @@
 .header__search {
   width: 7rem;
   padding: 0.5rem 1rem;
-  border: 0.5px solid var(--stroke-color);
+  border: var(--border);
   border-radius: 12px;
 }
 
 .header__button {
   padding: 0.5rem 1rem;
-  border: 1px solid transparent;
+  border: none;
   border-radius: 12px;
   background-color: var(--purple-color);
   color: var(--white-color);

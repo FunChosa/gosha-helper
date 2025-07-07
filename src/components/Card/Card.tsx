@@ -14,7 +14,12 @@ const Card = ({ card }: any) => {
   return (
     <div className="card__container">
       <div className="card__content-top">
-        <div className="card__content-top-left">{card.number}</div>
+        <div
+          className="card__content-open-env"
+          onClick={() => window.open(card.link)}
+        >
+          {card.number}
+        </div>
         <div className="card__content-top-right">
           <div className="card__content-top-right-icons">
             <img
@@ -36,12 +41,6 @@ const Card = ({ card }: any) => {
               onClick={() => deleteCard(card.id)}
             />
           </div>
-          <button
-            className="card__content-top-right-button"
-            onClick={() => window.open(card.link)}
-          >
-            go to env →{" "}
-          </button>
         </div>
       </div>
       <div className="card__content-bottom">

@@ -48,7 +48,7 @@ const UrlSettings = () => {
         style={{
           width: "100%",
           padding: "0.5rem 1rem",
-          border: "1px solid var(--stroke-color)",
+          border: "var(--border)",
           borderRadius: "12px",
         }}
       />

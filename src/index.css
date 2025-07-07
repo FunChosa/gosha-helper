@@ -10,6 +10,7 @@
   --orange-color: #f16942;
   --stroke-color: #cfcfcf;
   --text-secondary-color: #909090;
+  --border: .5px solid var(--stroke-color);
 }
 
 * {
@@ -28,7 +29,7 @@
 
 .body__container {
   display: flex;
-  gap: 2rem;
-  padding: 2rem;
+  padding: 1rem 2rem;
+  justify-content: space-between;
   flex-direction: row;
 }

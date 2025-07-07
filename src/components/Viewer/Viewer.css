@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 50%;
+  width: 49%;
 }
 
 .viewer__add-button-container {
@@ -31,7 +31,7 @@
   flex-direction: column;
   gap: 1rem;
   border-radius: 24px;
-  border: 0.5px solid var(--stroke-color);
+  border: var(--border);
   padding: 2rem 2rem;
 }
 

@@ -18,6 +18,7 @@
   gap: 1rem;
   height: 700px;
   overflow-y: scroll;
+  padding-right: 1rem;
 }
 
 .cards__no-cards {

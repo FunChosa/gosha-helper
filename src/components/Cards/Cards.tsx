@@ -3,12 +3,13 @@ import "./Cards.css";
 // @ts-ignore
 import useStore from "../../store";
 import { useEffect, useState } from "react";
+import type { ICard } from "../../types";
 
 const Cards = () => {
   const { cards } = useStore((state: any) => state);
   const [searchValue, setSearchValue] = useState("");
   const [filteredCards, setFilteredCards] = useState(
-    cards.sort((a: any, b: any) =>
+    cards.sort((a: ICard, b: ICard) =>
       a.pinned === b.pinned ? 0 : a.pinned ? -1 : 1
     )
   );
@@ -16,8 +17,8 @@ const Cards = () => {
   useEffect(() => {
     setFilteredCards(
       cards.filter(
-        (card: any) =>
-          card.description.toLowerCase().includes(searchValue) ||
+        (card: ICard) =>
+          card.description?.toLowerCase().includes(searchValue) ||
           card.number.toString().includes(searchValue)
       )
     );
@@ -41,7 +42,7 @@ const Cards = () => {
         {filteredCards.length === 0 && (
           <div className="cards__no-cards">no cards found</div>
         )}
-        {filteredCards.map((card: any) => (
+        {filteredCards.map((card: ICard) => (
           <Card key={card.id} card={card} />
         ))}
         {filteredCards.length > 10 && (

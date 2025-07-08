@@ -3,6 +3,8 @@ import Lock from "../../icons/lock.svg";
 import Unlock from "../../icons/unlock.svg";
 import Close from "../../icons/close.svg";
 import "./AddEditForm.css";
+import { Editor } from "@tinymce/tinymce-react";
+import type { ICard } from "../../types";
 
 const AddEditForm = ({
   closeForm,
@@ -17,11 +19,11 @@ const AddEditForm = ({
   closeForm: () => void;
   handleSaveForm: () => void;
   resetCard: () => void;
-  setCard: (card: any) => void;
+  setCard: (card: ICard) => void;
   handleLinkCreate: (value: string) => string;
   cardTitle: string;
   buttonTitle: string;
-  card: any;
+  card: ICard;
 }) => {
   const [isLinkDisabled, setIsLinkDisabled] = useState(true);
   const handleToggleLinkDisabled = () => {
@@ -47,7 +49,7 @@ const AddEditForm = ({
 
       <input
         type="text"
-        placeholder="Branch number"
+        placeholder="Branch number *"
         className="add-edit-form__input-branch"
         value={card.number || ""}
         onChange={(e) => {
@@ -62,8 +64,8 @@ const AddEditForm = ({
       <div className="add-edit-form__link-container">
         <input
           type="text"
-          className="add-edit-form__input-link"
-          placeholder="Environment link"
+          className="add-edit-form__input"
+          placeholder="Environment link *"
           value={card.link || ""}
           disabled={isLinkDisabled}
           onChange={(e) =>
@@ -81,7 +83,9 @@ const AddEditForm = ({
         />
       </div>
 
-      <textarea
+      <input
+        type="text"
+        className="add-edit-form__input"
         placeholder="Description (optional)"
         value={card.description}
         onChange={(e) =>
@@ -90,6 +94,31 @@ const AddEditForm = ({
             description: e.target.value,
           })
         }
+      />
+
+      <Editor
+        apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
+        value={card.notes}
+        onEditorChange={(e) => {
+          setCard({
+            ...card,
+            notes: e,
+          });
+        }}
+        init={{
+          placeholder: "Notes (optional)",
+          height: 300,
+          menubar: false,
+          plugins: ["link", "lists", "code"],
+          min_height: 300,
+          toolbar:
+            "undo redo | " +
+            "bold italic underline strikethrough | link bullist numlist code |" +
+            "fontsize fontfamily |" +
+            "alignleft aligncenter alignright alignjustify |" +
+            "forecolor backcolor | ",
+          content_style: "body { font-family:Poppins,sans-serif; }",
+        }}
       />
 
       <button

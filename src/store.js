@@ -8,6 +8,7 @@ const useStore = create(
       newCard: {
         number: "",
         description: "",
+        notes: "",
         id: "",
         link: "",
         pinned: false,
@@ -58,6 +59,7 @@ const useStore = create(
           newCard: {
             number: "",
             description: "",
+            notes: "",
             id: "",
             link: "",
             pinned: false,
@@ -69,6 +71,7 @@ const useStore = create(
     }),
     {
       name: "gosha-helper",
+      partialize: (state) => ({ cards: state.cards }),
     }
   )
 );

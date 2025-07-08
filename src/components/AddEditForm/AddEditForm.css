@@ -21,25 +21,17 @@
   width: 10rem;
 }
 
-.add-edit-form__input-link {
+.add-edit-form__input {
   padding: 0.5rem 1rem;
   border: var(--border);
   border-radius: 12px;
   width: 100%;
 }
 
-.add-edit-form__input-link:disabled {
+.add-edit-form__input:disabled {
   background-color: var(--stroke-color);
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.add-edit-form__container textarea {
-  padding: 0.5rem 1rem;
-  border: var(--border);
-  border-radius: 12px;
-  min-height: 10rem;
-  resize: vertical;
 }
 
 .add-edit-form__button {
@@ -51,10 +43,23 @@
   cursor: pointer;
   width: fit-content;
   align-self: flex-end;
+  transition: all 0.3s ease;
+}
+
+.add-edit-form__button:hover {
+  background-color: var(--black-color);
+  color: var(--white-color);
 }
 
 .add-edit-form__button:disabled {
   background-color: var(--stroke-color);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.add-edit-form__button:disabled:hover {
+  background-color: var(--stroke-color);
+  color: var(--black-color);
   opacity: 0.5;
   cursor: not-allowed;
 }

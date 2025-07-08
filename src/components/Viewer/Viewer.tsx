@@ -6,6 +6,7 @@ import useStore from "../../store";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect } from "react";
 import UrlSettings from "./UrlSettings";
+import type { ICard } from "../../types";
 
 const Viewer = () => {
   const {
@@ -42,6 +43,7 @@ const Viewer = () => {
   };
 
   const handleLinkCreate = (value: string) => {
+    if (!baseUrl) return value;
     return baseUrl.replace(/{{branchNumber}}/g, value);
   };
 
@@ -49,8 +51,10 @@ const Viewer = () => {
     if (cards.length === 0) {
       openAddForm();
     }
-    if (!cards.find((card: any) => editableCard?.id === card.id)) {
+    if (!cards.find((card: ICard) => editableCard?.id === card.id)) {
       closeEditForm();
+      resetEditableCard();
+      openAddForm();
     }
   }, [cards]);
 
@@ -62,7 +66,7 @@ const Viewer = () => {
     <div className="viewer__container">
       <div className="viewer__add-button-container">
         <button className="viewer__add-button" onClick={openAddForm}>
-          + add
+          + create
         </button>
         <img
           src={Settings}
@@ -75,7 +79,7 @@ const Viewer = () => {
       {isAddFormOpen && (
         <AddEditForm
           closeForm={closeAddForm}
-          cardTitle="Add new card"
+          cardTitle="New environment"
           buttonTitle="Add"
           handleSaveForm={handleAddCard}
           resetCard={resetNewCard}
@@ -87,8 +91,11 @@ const Viewer = () => {
       {isEditFormOpen && (
         <AddEditForm
           closeForm={closeEditForm}
-          cardTitle={`Edit: MON-${
-            cards.find((card: any) => editableCard?.id === card.id).number
+          cardTitle={`Edit: ${
+            editableCard?.id
+              ? cards.find((card: ICard) => editableCard?.id === card.id)
+                  ?.number
+              : undefined
           }`}
           buttonTitle="Update"
           handleSaveForm={handleEditCard}

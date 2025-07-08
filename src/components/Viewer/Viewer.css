@@ -18,6 +18,12 @@
   border: none;
   border-radius: 12px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.viewer__add-button:hover {
+  background-color: var(--black-color);
+  color: var(--white-color);
 }
 
 .viewer__settings-icon {
@@ -50,6 +56,12 @@ code {
   cursor: pointer;
   width: fit-content;
   align-self: flex-end;
+  transition: all 0.3s ease;
+}
+
+.url-settings__save-button:hover {
+  background-color: var(--black-color);
+  color: var(--white-color);
 }
 
 a {

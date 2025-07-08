@@ -9,6 +9,7 @@
   --yellow-color: #ffd255;
   --orange-color: #f16942;
   --stroke-color: #cfcfcf;
+  --red-color: #ff0000;
   --text-secondary-color: #909090;
   --border: .5px solid var(--stroke-color);
 }

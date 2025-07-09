@@ -13,5 +13,5 @@ export const CARDS_CONFIG = {
 export const CARD_CONFIG = {
   deleteButtonText: "Yes, delete!",
   cancelButtonText: "No, keep it",
-  noDescText: "no desc",
+  defaultDescription: "no desc",
 };

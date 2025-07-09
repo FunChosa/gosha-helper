@@ -3,15 +3,14 @@ import Delete from "../../icons/delete.svg";
 import PinTrue from "../../icons/pin_true.svg";
 import PinFalse from "../../icons/pin_false.svg";
 import Edit from "../../icons/edit.svg";
-// @ts-ignore
 import useStore from "../../store";
 import type { ICard } from "../../types";
 import { useState } from "react";
+import { CARD_CONFIG } from "../../constants";
 
 const Card = ({ card }: { card: ICard }) => {
-  const { deleteCard, editCard, openEditForm } = useStore(
-    (state: any) => state
-  );
+  const { deleteCard, editCard, openEditForm, editableCard, closeEditForm } =
+    useStore((state: any) => state);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   const handleDeleteConfirmation = (e: any) => {
@@ -22,21 +21,31 @@ const Card = ({ card }: { card: ICard }) => {
   const handleDelete = (e: any) => {
     e.stopPropagation();
     deleteCard(card.id);
+    if (editableCard?.id === card.id) {
+      closeEditForm();
+    }
     setDeleteConfirmation(false);
   };
 
-  const handleEdit = (e: any) => {
+  const handlePin = (e: any) => {
     e.stopPropagation();
     editCard({ ...card, pinned: !card.pinned });
   };
 
+  const handleEdit = (e: any) => {
+    e.stopPropagation();
+    openEditForm(card);
+  };
+
+  const handleOpenLink = (e: any) => {
+    e.stopPropagation();
+    window.open(card.link);
+  };
+
   return (
-    <div className="card__container" onClick={() => openEditForm(card)}>
+    <div className="card__container" onClick={handleEdit}>
       <div className="card__content-top">
-        <div
-          className="card__content-open-env"
-          onClick={() => window.open(card.link)}
-        >
+        <div className="card__content-open-env" onClick={handleOpenLink}>
           {card.number}
         </div>
         <div className="card__content-top-right">
@@ -46,13 +55,13 @@ const Card = ({ card }: { card: ICard }) => {
                 className="card__content-delete-button"
                 onClick={handleDelete}
               >
-                Yes, delete!
+                {CARD_CONFIG.deleteButtonText}
               </button>
               <button
                 className="card__content-cancel-button"
                 onClick={handleDeleteConfirmation}
               >
-                Cancel
+                {CARD_CONFIG.cancelButtonText}
               </button>
             </div>
           ) : (
@@ -61,16 +70,13 @@ const Card = ({ card }: { card: ICard }) => {
                 src={card.pinned ? PinTrue : PinFalse}
                 alt="pinned"
                 className="card__content-top-right-icon"
-                onClick={handleEdit}
+                onClick={handlePin}
               />
               <img
                 src={Edit}
                 alt="edit"
                 className="card__content-top-right-icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  openEditForm(card);
-                }}
+                onClick={handleEdit}
               />
               <img
                 src={Delete}
@@ -83,7 +89,7 @@ const Card = ({ card }: { card: ICard }) => {
         </div>
       </div>
       <div className="card__content-bottom">
-        {card.description || "no desc"}
+        {card.description || CARD_CONFIG.defaultDescription}
       </div>
     </div>
   );

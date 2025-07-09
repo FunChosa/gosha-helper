@@ -6,3 +6,14 @@ export interface ICard {
   notes?: string;
   pinned: boolean;
 }
+
+export interface IStore {
+  cards: ICard[];
+  newCard: ICard;
+  editableCard: ICard | null;
+  isAddFormOpen: boolean;
+  isEditFormOpen: boolean;
+  isDeletePopoverOpen: boolean;
+  isSettingsOpen: boolean;
+  baseUrl: string;
+}

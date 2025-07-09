@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import type { ICard, IStore } from "./types";
 
 const useStore = create(
   persist(
@@ -21,24 +22,26 @@ const useStore = create(
       isSettingsOpen: false,
       baseUrl: "",
 
-      addCard: (card) => {
-        set((state) => ({ cards: [...state.cards, card] }));
+      addCard: (card: ICard) => {
+        set((state: { cards: ICard[] }) => ({ cards: [...state.cards, card] }));
       },
 
-      deleteCard: (cardId) =>
-        set((state) => ({
-          cards: state.cards.filter((card) => card.id !== cardId),
+      deleteCard: (cardId: string) =>
+        set((state: { cards: ICard[] }) => ({
+          cards: state.cards.filter(
+            (card: { id: string }) => card.id !== cardId
+          ),
         })),
 
-      editCard: (editedCard) =>
-        set((state) => ({
-          cards: state.cards.map((card) =>
+      editCard: (editedCard: ICard) =>
+        set((state: { cards: ICard[] }) => ({
+          cards: state.cards.map((card: ICard) =>
             card.id === editedCard.id ? editedCard : card
           ),
         })),
 
-      setNewCard: (newCard) => set({ newCard }),
-      setEditableCard: (editableCard) => set({ editableCard }),
+      setNewCard: (newCard: ICard) => set({ newCard }),
+      setEditableCard: (editableCard: ICard) => set({ editableCard }),
 
       openAddForm: () => set({ isAddFormOpen: true, isEditFormOpen: false }),
       closeAddForm: () => set({ isAddFormOpen: false }),
@@ -46,14 +49,13 @@ const useStore = create(
       openSettings: () => set({ isSettingsOpen: true }),
       closeSettings: () => set({ isSettingsOpen: false }),
 
-      openEditForm: (card) =>
+      openEditForm: (card: ICard) =>
         set({ isEditFormOpen: true, isAddFormOpen: false, editableCard: card }),
       closeEditForm: () => set({ isEditFormOpen: false, editableCard: null }),
 
       openDeletePopover: () => set({ isDeletePopoverOpen: true }),
       closeDeletePopover: () => set({ isDeletePopoverOpen: false }),
 
-      setNewCard: (newCard) => set({ newCard }),
       resetNewCard: () =>
         set({
           newCard: {
@@ -67,11 +69,14 @@ const useStore = create(
         }),
 
       resetEditableCard: () => set({ editableCard: null }),
-      setBaseUrl: (baseUrl) => set({ baseUrl }),
+      setBaseUrl: (baseUrl: string) => set({ baseUrl }),
     }),
     {
       name: "gosha-helper",
-      partialize: (state) => ({ cards: state.cards }),
+      partialize: (state: IStore) => ({
+        cards: state.cards,
+        baseUrl: state.baseUrl,
+      }),
     }
   )
 );

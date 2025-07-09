@@ -1,7 +1,6 @@
 import AddEditForm from "../AddEditForm/AddEditForm";
 import Settings from "../../icons/settings.svg";
 import "./Viewer.css";
-// @ts-ignore
 import useStore from "../../store";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect } from "react";
@@ -49,11 +48,6 @@ const Viewer = () => {
 
   useEffect(() => {
     if (cards.length === 0) {
-      openAddForm();
-    }
-    if (!cards.find((card: ICard) => editableCard?.id === card.id)) {
-      closeEditForm();
-      resetEditableCard();
       openAddForm();
     }
   }, [cards]);

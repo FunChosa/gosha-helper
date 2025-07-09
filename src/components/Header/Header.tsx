@@ -1,9 +1,9 @@
 import "./Header.css";
 import Clown from "../../icons/clown.svg";
-// @ts-ignore
 import useStore from "../../store";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { HEADER_CONFIG } from "../../constants";
 
 const Header = () => {
   const { baseUrl, openSettings } = useStore((state: any) => state);
@@ -41,23 +41,27 @@ const Header = () => {
     window.open(baseUrl.replace("{{branchNumber}}", branchNumber), "_blank");
   };
 
+  const handleSearch = (e: any) => {
+    setBranchNumber(e.target.value);
+  };
+
   return (
     <>
       <div className="header__container">
         <div className="header__title">
           <img src={Clown} alt="logo" className="header__logo" />
-          gosha
+          {HEADER_CONFIG.title}
         </div>
         <div className="header__search-container">
           <input
             type="text"
-            placeholder="1754"
+            placeholder={HEADER_CONFIG.searchPlaceholder}
             className="header__search"
-            onChange={(e) => setBranchNumber(e.target.value)}
+            onChange={handleSearch}
             value={branchNumber}
           />
           <button className="header__button" onClick={handleBranchOpen}>
-            fast go →
+            {HEADER_CONFIG.fastButtonText}
           </button>
         </div>
       </div>

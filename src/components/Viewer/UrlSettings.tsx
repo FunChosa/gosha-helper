@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./Viewer.css";
 import Close from "../../icons/close.svg";
-// @ts-ignore
 import useStore from "../../store";
 import { toast } from "react-toastify";
 

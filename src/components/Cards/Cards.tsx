@@ -1,9 +1,9 @@
 import Card from "../Card/Card";
 import "./Cards.css";
-// @ts-ignore
 import useStore from "../../store";
 import { useEffect, useState } from "react";
 import type { ICard } from "../../types";
+import { CARDS_CONFIG } from "../../constants";
 
 const Cards = () => {
   const { cards } = useStore((state: any) => state);
@@ -24,29 +24,33 @@ const Cards = () => {
     );
   }, [searchValue, cards]);
 
+  const cardsCount = `${filteredCards.length} / ${cards.length} cards`;
+
+  const handleSearch = (e: any) => {
+    setSearchValue(e.target.value);
+  };
+
   return (
     <div className="cards__container">
       <div className="cards__search-container">
         <input
           type="search"
-          placeholder="Search"
+          placeholder={CARDS_CONFIG.searchPlaceholder}
           className="cards__search-input"
           value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={handleSearch}
         />
-        <div>
-          {filteredCards.length} / {cards.length} cards
-        </div>
+        <div>{cardsCount}</div>
       </div>
       <div className="cards__cards-list-container">
         {filteredCards.length === 0 && (
-          <div className="cards__no-cards">no cards found</div>
+          <div className="cards__no-cards">{CARDS_CONFIG.noDataText}</div>
         )}
         {filteredCards.map((card: ICard) => (
           <Card key={card.id} card={card} />
         ))}
         {filteredCards.length > 10 && (
-          <div style={{ alignSelf: "center" }}>🤡</div>
+          <div style={{ alignSelf: "center" }}>{CARDS_CONFIG.clownEmoji}</div>
         )}
       </div>
     </div>

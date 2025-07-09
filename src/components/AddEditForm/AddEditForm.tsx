@@ -2,6 +2,7 @@ import { useState } from "react";
 import Lock from "../../icons/lock.svg";
 import Unlock from "../../icons/unlock.svg";
 import Close from "../../icons/close.svg";
+import Reload from "../../icons/reload.svg";
 import "./AddEditForm.css";
 import { Editor } from "@tinymce/tinymce-react";
 import type { ICard } from "../../types";
@@ -72,6 +73,19 @@ const AddEditForm = ({
             setCard({
               ...card,
               link: e.target.value,
+            })
+          }
+        />
+        <img
+          src={Reload}
+          style={isLinkDisabled ? { opacity: 0.5, cursor: "not-allowed" } : {}}
+          alt="reload"
+          className="add-edit-form__reload-icon"
+          onClick={() =>
+            !isLinkDisabled &&
+            setCard({
+              ...card,
+              link: handleLinkCreate(card.number),
             })
           }
         />
